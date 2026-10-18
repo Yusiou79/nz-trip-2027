@@ -14,6 +14,8 @@
       --secondary-light: #d1fae5;
       --accent: #d97706;
       --accent-light: #fef3c7;
+      --rose: #e11d48;
+      --rose-light: #ffe4e6;
       --text: #0f172a;
       --muted: #64748b;
       --border: #e2e8f0;
@@ -24,14 +26,14 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: 80px;
+      padding-bottom: 60px;
     }
 
     /* 頂部橫幅 */
     .hero {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white;
-      padding: 28px 20px 24px;
+      padding: 26px 16px 22px;
       text-align: center;
     }
     .hero-badge {
@@ -41,27 +43,30 @@
       border-radius: 20px;
       font-size: 12px;
       margin-bottom: 8px;
-      letter-spacing: 0.5px;
     }
-    .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .hero h1 { font-size: 21px; font-weight: 800; margin-bottom: 4px; }
     .hero p { font-size: 13px; color: #bae6fd; }
 
-    /* 頂部吸附導覽列 */
+    /* 頂部可滑動分頁導覽列 (支援6個分頁) */
     .nav-tabs {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
       border-bottom: 1px solid var(--border);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      -webkit-overflow-scrolling: touch;
     }
+    .nav-tabs::-webkit-scrollbar { display: none; }
     .tab-btn {
-      flex: 1;
+      flex: 0 0 auto;
       border: none;
       background: none;
-      padding: 12px 4px;
+      padding: 12px 14px;
       font-size: 13px;
       font-weight: 600;
       color: var(--muted);
@@ -72,22 +77,22 @@
     .tab-btn.active {
       color: var(--primary);
       border-bottom-color: var(--primary);
-      background: rgba(2, 132, 199, 0.04);
+      background: rgba(2, 132, 199, 0.05);
     }
 
     /* 內容容器 */
     .container { max-width: 680px; margin: 0 auto; padding: 16px; }
     .page { display: none; }
-    .page.active { display: block; animation: fadeIn 0.25s ease; }
+    .page.active { display: block; animation: fadeIn 0.2s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     .section-title {
       font-size: 16px;
       font-weight: 700;
-      margin: 18px 0 12px;
+      margin: 16px 0 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
       color: var(--text);
     }
 
@@ -131,7 +136,7 @@
       border: 1px solid var(--border);
     }
     .stat-label { font-size: 11px; color: var(--muted); }
-    .stat-val { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
+    .stat-val { font-size: 13px; font-weight: 700; color: var(--text); margin-top: 2px; }
 
     /* 每日行程卡片 */
     .day-card {
@@ -187,7 +192,7 @@
     }
     .hl { color: var(--primary); font-weight: 700; }
 
-    /* 美食與自炊卡片 */
+    /* 資訊與美食卡片 */
     .info-card {
       background: var(--card);
       border-radius: 14px;
@@ -211,376 +216,33 @@
       padding: 2px 8px;
       border-radius: 12px;
     }
-  </style>
-</head>
-<body>
 
-  <header class="hero">
-    <div class="hero-badge">4/29 - 5/15 金秋自駕特輯</div>
-    <h1>🇳🇿 紐西蘭南北島 16 日之旅</h1>
-    <p>南島 6 字型大環線 ＋ 北島哈比村・維塔工作室</p>
-  </header>
-
-  <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="openTab('nav', this)">🗺️ 導航總覽</button>
-    <button class="tab-btn" onclick="openTab('plan', this)">🗓️ 16日行程</button>
-    <button class="tab-btn" onclick="openTab('food', this)">🍽️ 必吃美食</button>
-    <button class="tab-btn" onclick="openTab('cook', this)">🍳 自炊攻略</button>
-  </nav>
-
-  <main class="container">
-
-    <!-- 分頁 1：導航與總覽 -->
-    <section id="tab-nav" class="page active">
-      <div class="section-title">📍 一鍵開啟 Google Maps 路線</div>
-      
-      <div class="map-card">
-        <h3>🏔️ 南島「6字型」黃金大環線 (Day 2 - Day 14)</h3>
-        <p>皇后鎮取車 ➔ 蒂阿瑙 ➔ 米佛峽灣 ➔ 瓦納卡 ➔ 蒂卡波 ➔ 庫克山 ➔ Twizel ➔ 奧馬魯 ➔ 阿卡羅阿 ➔ 基督城機場還車</p>
-        <a class="map-btn btn-south" href="https://www.google.com/maps/dir/Queenstown/Te+Anau/Milford+Sound/Wanaka/Lake+Tekapo/Aoraki%2FMount+Cook/Twizel/Oamaru/Akaroa/Christchurch+Airport/" target="_blank">
-          📲 打開【南島自駕】Google Maps 導航
-        </a>
-      </div>
-
-      <div class="map-card">
-        <h3>🎬 北島魔戒與地熱精華線 (Day 15 - Day 16)</h3>
-        <p>奧克蘭機場取車 ➔ 哈比村 (Hobbiton) ➔ 羅托路亞地熱溫泉 ➔ 奧克蘭維塔工作室 (Unleashed) ➔ 奧克蘭機場還車</p>
-        <a class="map-btn btn-north" href="https://www.google.com/maps/dir/Auckland+Airport/Hobbiton+Movie+Set/Rotorua/Weta+Workshop+Unleashed/Auckland+Airport/" target="_blank">
-          📲 打開【北島自駕】Google Maps 導航
-        </a>
-      </div>
-
-      <div class="section-title">📊 行程關鍵亮點</div>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-label">🚗 總預估里程</div>
-          <div class="stat-val">南島 1,850km / 北島 480km</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">🌌 最佳觀星夜</div>
-          <div class="stat-val">5/6 蒂卡波 (新月0%月光)</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">🪂 高空跳傘防線</div>
-          <div class="stat-val">皇后鎮2次 ＋ 庫克山1次</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">🏔️ 庫克山深度停留</div>
-          <div class="stat-val">隱士飯店1晚 ＋ Twizel 2晚</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 分頁 2：16日行程 -->
-    <section id="tab-plan" class="page">
-      <div class="section-title">🗓️ 每日路線、車程與住宿明細</div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 1</span><span class="day-date">4/29 (三)</span></div>
-        <div class="day-title">✈️ 台北出發 ➔ 飛往紐西蘭</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 交通：國際航班飛行</span>
-          <span class="tag tag-stay">📍 住宿：機上夜宿</span>
-        </div>
-        <ul class="item-list">
-          <li>搭乘航班飛往紐西蘭，準備展開 16 天金秋奇幻自駕之旅。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 2</span><span class="day-date">4/30 (四)</span></div>
-        <div class="day-title">🛬 轉機抵達皇后鎮 ➔ 纜車夜景</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：機場至市區約 20 分鐘</span>
-          <span class="tag tag-stay">📍 住宿：皇后鎮 (連泊1)</span>
-        </div>
-        <ul class="item-list">
-          <li>抵達皇后鎮機場辦理取車，前往市區超市採買補給。</li>
-          <li>傍晚搭乘 <span class="hl">Skyline 纜車</span> 俯瞰瓦卡蒂普湖夕陽與夜景，享用自助晚餐。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 3</span><span class="day-date">5/1 (五)</span></div>
-        <div class="day-title">🪂 皇后鎮極限跳傘 ➔ 箭鎮金秋落葉</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：往返箭鎮約 50 分鐘</span>
-          <span class="tag tag-stay">📍 住宿：皇后鎮 (連泊2)</span>
-        </div>
-        <ul class="item-list">
-          <li><span class="hl">【跳傘第1重防線】</span>上午挑戰 NZONE 15,000 呎高空跳傘。</li>
-          <li>下午自駕前往金秋最美掏金小鎮——<span class="hl">箭鎮 (Arrowtown)</span> 漫步拍紅葉。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 4</span><span class="day-date">5/2 (六)</span></div>
-        <div class="day-title">✨ 皇后鎮 ➔ 蒂阿瑙藍光螢火蟲洞</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 2 小時 (170 km)</span>
-          <span class="tag tag-stay">📍 住宿：蒂阿瑙 (連泊1)</span>
-        </div>
-        <ul class="item-list">
-          <li><span class="hl">【跳傘第2重防線】</span>若前日因天候取消，今早可於皇后鎮補跳。</li>
-          <li>下午開往蒂阿瑙湖畔，晚上搭船探索奇幻的 <span class="hl">藍光螢火蟲洞 (Glowworm Caves)</span>。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 5</span><span class="day-date">5/3 (日)</span></div>
-        <div class="day-title">🚢 世界自然遺產：米佛峽灣巡遊</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：94號公路來回約 4.5 小時</span>
-          <span class="tag tag-stay">📍 住宿：蒂阿瑙 (連泊2)</span>
-        </div>
-        <ul class="item-list">
-          <li>行駛壯麗的 94 號高山景觀公路，途經鏡湖 (Mirror Lakes)、穿越荷馬隧道。</li>
-          <li>搭乘 <span class="hl">米佛峽灣遊船</span> 欣賞冰河峽谷、瀑布與野生海豹。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 6</span><span class="day-date">5/4 (一)</span></div>
-        <div class="day-title">🍷 蒂阿瑙 ➔ 皇冠峰公路 ➔ 瓦納卡</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 3 小時 (225 km)</span>
-          <span class="tag tag-stay">📍 住宿：瓦納卡</span>
-        </div>
-        <ul class="item-list">
-          <li>途經水果小鎮 Cromwell 或吉布斯頓谷酒莊品嚐黑皮諾紅酒。</li>
-          <li>傍晚抵達瓦納卡湖畔，拍攝著名的 <span class="hl">瓦納卡孤獨樹 (That Wanaka Tree)</span>。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 7</span><span class="day-date">5/5 (二)</span></div>
-        <div class="day-title">🏔️ 瓦納卡 ➔ 林迪斯隘口 ➔ 蒂卡波湖</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 2 小時 15 分 (200 km)</span>
-          <span class="tag tag-stay">📍 住宿：蒂卡波湖 (連泊1)</span>
-        </div>
-        <ul class="item-list">
-          <li>上午可於瓦納卡湖畔漫步或走 Mount Iron 輕健行。</li>
-          <li>穿越金黃色草原 <span class="hl">Lindis Pass</span>，傍晚抵達蒂卡波湖。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 8</span><span class="day-date">5/6 (三)</span></div>
-        <div class="day-title">🌌 蒂卡波漫遊 ➔ 絕美新月無光害觀星</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：鎮內定點活動</span>
-          <span class="tag tag-stay">📍 住宿：蒂卡波湖 (連泊2)</span>
-        </div>
-        <ul class="item-list">
-          <li>白天上約翰山 Astro Cafe 喝咖啡俯瞰牛奶藍湖景，造訪好牧羊人教堂。</li>
-          <li><span class="hl">【星空重頭戲】</span>適逢新月 (0%月光干擾)，深夜參加觀星團仰望南十字星與銀河。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 9</span><span class="day-date">5/7 (四)</span></div>
-        <div class="day-title">⛰️ 普卡基湖 ➔ 庫克山胡克谷步道</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 1 小時 15 分 (105 km)</span>
-          <span class="tag tag-stay">📍 住宿：庫克山隱士飯店 (The Hermitage)</span>
-        </div>
-        <ul class="item-list">
-          <li>沿著最美冰河湖 Pukaki 一路開往庫克山。</li>
-          <li>挑戰經典平緩的 <span class="hl">Hooker Valley Track (胡克谷步道)</span>，走過三座吊橋直面冰河湖。</li>
-          <li>晚上入住夢幻隱士飯店，在房內欣賞庫克山日落金山。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 10</span><span class="day-date">5/8 (五)</span></div>
-        <div class="day-title">🚁 塔斯曼冰川直升機健行 ➔ Twizel</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：庫克山至 Twizel 約 45 分鐘</span>
-          <span class="tag tag-stay">📍 住宿：Twizel 小鎮 (連泊1)</span>
-        </div>
-        <ul class="item-list">
-          <li>上午參加 <span class="hl">塔斯曼冰川直升機健行 (Tasman Glacier Heli-Hike)</span> 探索藍冰洞。</li>
-          <li><span class="hl">【跳傘第3重防線】</span>若皇后鎮未跳成，可於 Pukaki 機場補跳。</li>
-          <li>傍晚出谷入住高 CP 值的 Twizel 小鎮，買高山鮭魚與牛排自炊。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 11</span><span class="day-date">5/9 (六)</span></div>
-        <div class="day-title">🧗‍♂️ 庫克山周圍深度日 (冰川預備日 / 黏土崖)</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：周邊漫遊約 1 小時</span>
-          <span class="tag tag-stay">📍 住宿：Twizel 小鎮 (連泊2)</span>
-        </div>
-        <ul class="item-list">
-          <li><span class="hl">【冰川健行天候預備日】</span>若前日天氣不佳可改至今日飛行。</li>
-          <li>若已順利完成，可前往奇特惡地地形 <span class="hl">黏土崖 (Clay Cliffs)</span>、Omarama 熱水浴池泡湯或重返塔斯曼冰河湖步道。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 12</span><span class="day-date">5/10 (日)</span></div>
-        <div class="day-title">🐧 Twizel ➔ 奧馬魯小藍企鵝歸巢</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 1 小時 45 分 (145 km)</span>
-          <span class="tag tag-stay">📍 住宿：奧馬魯</span>
-        </div>
-        <ul class="item-list">
-          <li>沿懷塔基河谷東行，逛奧馬魯維多利亞歷史街區與蒸氣龐克總部。</li>
-          <li>天黑前至保育中心看台，觀賞世界最小的 <span class="hl">小藍企鵝搖擺歸巢</span>。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 13</span><span class="day-date">5/11 (一)</span></div>
-        <div class="day-title">🥝 奧馬魯 ➔ 基督城 Willowbank 看奇異鳥</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：約 3 小時 15 分 (250 km)</span>
-          <span class="tag tag-stay">📍 住宿：基督城 (連泊1)</span>
-        </div>
-        <ul class="item-list">
-          <li>北上返回基督城，下午前往 <span class="hl">Willowbank 野生動物保護區</span>，在無玻璃阻隔的夜行館近距離看活生生的國寶奇異鳥 (Kiwi)。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge">Day 14</span><span class="day-date">5/12 (二)</span></div>
-        <div class="day-title">🇫🇷 基督城 ➔ 阿卡羅阿法國小鎮一日遊</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：來回約 2 小時 40 分</span>
-          <span class="tag tag-stay">📍 住宿：基督城機場周邊 (連泊2)</span>
-        </div>
-        <ul class="item-list">
-          <li>自駕前往火山口海灣的法國風情小鎮 <span class="hl">阿卡羅阿 (Akaroa)</span>，看海景、吃炸魚薯條，或搭船尋找賀氏海豚。</li>
-          <li>傍晚回基督城機場附近辦理南島還車。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge north-badge">Day 15</span><span class="day-date">5/13 (三)</span></div>
-        <div class="day-title">🧙‍♂️ 飛往奧克蘭 ➔ 哈比村 ➔ 羅托路亞溫泉</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：奧克蘭➔哈比村 2h ➔ 羅托路亞 1h</span>
-          <span class="tag tag-stay">📍 住宿：羅托路亞</span>
-        </div>
-        <ul class="item-list">
-          <li>搭早班機飛抵奧克蘭，取車南下直奔 <span class="hl">哈比村 (Hobbiton Movie Set)</span>，走進袋底洞與綠龍客棧喝薑汁啤酒。</li>
-          <li>傍晚抵達羅托路亞，享受 Polynesian Spa 地熱溫泉。</li>
-        </ul>
-      </div>
-
-      <div class="day-card">
-        <div class="day-top"><span class="day-badge north-badge">Day 16</span><span class="day-date">5/14 - 5/15</span></div>
-        <div class="day-title">👹 羅托路亞地熱 ➔ 奧克蘭維塔工作室 ➔ 返台</div>
-        <div class="tags">
-          <span class="tag tag-drive">🚗 車程：羅托路亞➔奧克蘭約 3 小時</span>
-          <span class="tag tag-stay">📍 住宿：機上 (5/15 抵達台灣)</span>
-        </div>
-        <ul class="item-list">
-          <li>上午參觀羅托路亞地熱奇觀或紅木森林步道。</li>
-          <li>下午返回奧克蘭市區，參觀天空塔旁的 <span class="hl">維塔工作室：釋放 (Wētā Workshop Unleashed)</span> 體驗頂級電影特效。</li>
-          <li>晚間前往奧克蘭機場還車，搭機平安返台。</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 分頁 3：必吃美食 -->
-    <section id="tab-food" class="page">
-      <div class="section-title">🍽️ 各城鎮必吃餐廳與名物清單</div>
-
-      <div class="info-card">
-        <h3>🍔 皇后鎮 & 箭鎮 <span class="city-pill">Day 2 - 4</span></h3>
-        <ul class="item-list">
-          <li><span class="hl">Fergburger：</span>地表最強大漢堡，推薦鹿肉堡或經典大弗格，隔壁 Fergbaker 的肉派與可頌也極強。</li>
-          <li><span class="hl">Flame Bar & Grill：</span>湖畔超人氣豬肋排與牛排餐廳，份量十足。</li>
-          <li><span class="hl">Patagonia Chocolates：</span>湖畔必吃手工冰淇淋與熱巧克力。</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🥧 蒂阿瑙 & 瓦納卡 <span class="city-pill">Day 4 - 7</span></h3>
-        <ul class="item-list">
-          <li><span class="hl">Miles Better Pies (蒂阿瑙)：</span>前往米佛峽灣前必買的頂級手工鹿肉派與牛排派。</li>
-          <li><span class="hl">Big Fig (瓦納卡)：</span>慢燉料理名店，自選盤餐（必點慢烤羊肉與中東風味烤蔬菜）。</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🍣 蒂卡波 & 庫克山 & Twizel <span class="city-pill">Day 7 - 11</span></h3>
-        <ul class="item-list">
-          <li><span class="hl">Kohan Restaurant (蒂卡波)：</span>湖景日式餐廳，必點高山鮭魚便當（建議提前預約）。</li>
-          <li><span class="hl">High Country Salmon (Twizel)：</span>離 Twizel 僅 5 分鐘車程的水上鮭魚農場，現切冰河生魚片新鮮度滿分！</li>
-          <li><span class="hl">Mt Cook Alpine Salmon Shop (Pukaki湖畔)：</span>一邊看牛奶藍湖景，一邊大啖盒裝鮭魚刺身。</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🦞 奧馬魯 & 阿卡羅阿 & 北島 <span class="city-pill">Day 12 - 16</span></h3>
-        <ul class="item-list">
-          <li><span class="hl">Cucina (奧馬魯)：</span>評價極高的南島精緻義式與排餐料理。</li>
-          <li><span class="hl">Akaroa Fish & Chips (阿卡羅阿)：</span>在法式海灣旁享用現炸鮮魚薯條。</li>
-          <li><span class="hl">Eat Streat (羅托路亞)：</span>溫泉街半露天美食長廊，推薦 Atticus Finch 分食料理。</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 分頁 4：自炊攻略 -->
-    <section id="tab-cook" class="page">
-      <div class="section-title">🛒 超市採買指南与民宿自炊食譜</div>
-
-      <div class="info-card">
-        <h3>🛒 三大超市怎麼挑？</h3>
-        <ul class="item-list">
-          <li><span class="hl">PAK'nSAVE (黃色)：</span>全紐西蘭最便宜！適合在皇后鎮或基督城大採買水、零食、牛排與紅酒。</li>
-          <li><span class="hl">New World (紅色)：</span>生鮮肉品與烘焙品質最好，Twizel 與瓦納卡採買首選。</li>
-          <li><span class="hl">Four Square (綠紅小超市)：</span>蒂卡波與蒂阿瑙小鎮的好鄰居，補貨雞蛋、鮮奶最方便。</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🥩 1. 香煎紐西蘭草飼肋眼 ＋ 奶油蘆筍</h3>
-        <ul class="item-list">
-          <li><span class="hl">採買食材：</span>Angus Scotch Fillet (肋眼) 或 Sirloin (沙朗)、Lewis Road Creamery 奶油、大蒜、蘆筍或蘑菇。</li>
-          <li><span class="hl">做法：</span>牛排退冰擦乾撒海鹽，大火熱鍋煎至兩面焦脆（各約 90 秒），丟入大塊紐西蘭奶油與拍扁大蒜澆淋增香，靜置 5 分鐘切開即是完美五分熟！</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🥘 2. 濃郁鮮甜「無水蕃茄牛肉咖哩」</h3>
-        <ul class="item-list">
-          <li><span class="hl">採買食材：</span>紐西蘭牛肋條/切塊牛肉 (Beef Diced)、洋蔥 2 顆、大番茄 3 顆、櫛瓜、日式咖哩塊。</li>
-          <li><span class="hl">做法：</span>鍋底依序鋪上切塊番茄、大量洋蔥絲、櫛瓜與煎香的牛肉塊，完全不加一滴水，蓋緊鍋蓋小火悶煮 40 分鐘，蔬菜釋出滿滿甘甜原汁後拌入咖哩塊即完成。</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🦐 3. 南島綠殼淡菜海鮮燉飯 (Paella)</h3>
-        <ul class="item-list">
-          <li><span class="hl">採買食材：</span>紐西蘭特產綠殼淡菜 (Green-lipped Mussels)、鮮蝦、透抽、洋蔥、高湯、白米。</li>
-          <li><span class="hl">做法：</span>橄欖油爆香蒜末與洋蔥，倒入生米翻炒至微透，加入高湯與番茄糊鋪平，上方擺滿綠殼淡菜與鮮蝦，加蓋中小火悶煮 18 分鐘，開蓋擠上黃檸檬汁超對味！</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h3>🍳 4. 自駕早晨元氣「馬鈴薯培根烘蛋」</h3>
-        <ul class="item-list">
-          <li><span class="hl">採買食材：</span>紐西蘭小馬鈴薯 (Agria Potatoes)、厚切培根、自由放牧雞蛋 5 顆、切達起司絲。</li>
-          <li><span class="hl">做法：</span>馬鈴薯切薄片與培根下鍋半煎炸至金黃鬆軟，倒入打散的蛋液與滿滿起司絲，加蓋小火慢烘（或整鍋送進民宿烤箱 180度烤 15 分鐘），吃不完還能切塊帶上車當點心！</li>
-        </ul>
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    function openTab(tabName, btnElement) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('tab-' + tabName).classList.add('active');
-      btnElement.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* 購物清單與行前檢核表 (互動勾選樣式) */
+    .check-group {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
     }
-  </script>
-</body>
-</html>
+    .check-group h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 8px;
+      border-top: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-radius: 8px;
+    }
+    .check-item:first-of-type { border-top: none; }
+    .check-item
